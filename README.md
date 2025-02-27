@@ -1,13 +1,12 @@
-## Foundry
+## Bonding Curve ERC20 launchpad
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**This is a singleton smart contract for deploying tokens to a bonding curve similart to pumpfun but for EVM / Uniswap (foundry project)**
 
-Foundry consists of:
+layout:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **src/CurveManager.sol**: Contains the main logic for creation / swapping / bonding.
+- **src/CurveQuoter.sol**: used for price quoting.
+- **src/ERC20Token.sol**: Custom ERC20 that limits which smartctontracts can hold the token before bond (behaves like normal after bond)
 
 ## Documentation
 
@@ -23,44 +22,10 @@ $ forge build
 
 ### Test
 
-```shell
-$ forge test
-```
-
-### Format
+Some tests require env MAINNET_RPC_URL to be set (to test bond function against deployed uniswap contracts)
 
 ```shell
-$ forge fmt
+$ forge test --via-ir
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This is experimental software provided as is, for educational purposes. Has been tested in foundry and on testnet, please conduct your own thorough testing before using. Feel free to make a PR or open an issue if you notice any bugs.
